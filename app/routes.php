@@ -21,3 +21,22 @@
 // Route::post('login', array('uses' => 'HomeController@doLogin'));
 
 Route::controller('users', 'UsersController');
+
+Route::get('eloquent', 'bearController@view');
+
+
+Route::get('/', function()
+{
+	return View::make('home');
+});
+
+Route::get('about', function()
+{
+	return View::make('about');
+});
+
+Route::get('work', array('as' => 'work', function()
+{
+	return View::make('work');
+}));
+

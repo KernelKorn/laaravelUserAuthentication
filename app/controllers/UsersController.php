@@ -4,7 +4,7 @@ Class UsersController extends BaseController
 {
 	public function __construct() {
 	    $this->beforeFilter('csrf', array('on'=>'post'));
-	    $this->beforeFilter('auth', array('only'=>array('getDashboard')));
+	    $this->beforeFilter('auth', array('except'=>array('getRegister', 'postCreate', 'getLogin', 'postSignin')));
 	}
 
 	public function getRegister()
@@ -22,7 +22,6 @@ Class UsersController extends BaseController
 			return Redirect::to('users/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		} else {
 
-			Log::info("gets called");
 			$user = new User;
 			$user->firstname = Input::get('firstname');
 			$user->lastname = Input::get('lastname');
@@ -44,7 +43,7 @@ Class UsersController extends BaseController
 		if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password')))) {
 			return Redirect::to('users/dashboard')->with('message', 'You are now logged in!');
 		} else {
-			Redirect::to('users/login')
+			return Redirect::to('users/login')
 				->with('message', 'Your username/password combination was incorrect')
 				->withInput();
 		}
