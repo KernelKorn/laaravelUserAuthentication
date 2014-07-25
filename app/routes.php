@@ -19,6 +19,7 @@
 // Route::get('login', array('uses' => 'HomeController@showLogin'));
 
 // Route::post('login', array('uses' => 'HomeController@doLogin'));
+Route::resource('nerds', 'NerdController');
 
 Route::controller('users', 'UsersController');
 

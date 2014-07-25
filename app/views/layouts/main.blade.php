@@ -8,6 +8,7 @@
 	<title>Authentication App with Laravel 4</title>
 	{{ HTML::style('packages/bootstrap/css/bootstrap.min.css')}}
 	{{ HTML::style('css/main.css')}}
+
 </head>
 
 <body>
@@ -21,6 +22,8 @@
 	                    <li>{{ HTML::link('users/login', 'Login') }}</li>
                 	@else
                 		<li>{{ HTML::link('users/logout', 'Logout') }}</li>
+                        <li><a href="{{ URL::to('nerds') }}">View All Nerds</a></li>
+                        <li><a href="{{ URL::to('nerds/create') }}">Create a Nerd</a>
                 	@endif
                 </ul>
             </div>
@@ -33,10 +36,11 @@
         @if(Session::has('message'))
             <p class="alert alert-warning">{{ Session::get('message') }}</p>
         @endif
+        @yield('content')
     </div>
 
 	<div class="wrapper">
-		@yield('content')
+
 	</div><!--/#wrapper -->
 </body>
 </html>
